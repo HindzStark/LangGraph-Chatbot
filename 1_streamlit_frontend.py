@@ -11,6 +11,7 @@ CONFIG={'configurable':{'thread_id':'1'}}
 if 'message_history' not in st.session_state:
     st.session_state['message_history']=[]
 
+
 # first message history will be displayed
 for message in st.session_state['message_history']:
     with st.chat_message(message['role']): 
@@ -19,11 +20,16 @@ for message in st.session_state['message_history']:
 user_input=st.chat_input("Type Here")
 
 if user_input:
+    # if user type input
 
+    # first it will be appended to message history then it will be displayed on screen as it look user sent it
+    # appended to history
     st.session_state['message_history'].append({'role':'user','content':user_input})
+    # displayed
     with st.chat_message('user'):
         st.text(user_input)
 
+    # calling chatbot
     response=chatbot.invoke({'messages':[HumanMessage(user_input)]},config=CONFIG)
     ai_message=response['messages'][-1].content
     st.session_state['message_history'].append({'role':'assistant','content':ai_message})

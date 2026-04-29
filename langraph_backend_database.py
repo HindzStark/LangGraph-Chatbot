@@ -36,7 +36,7 @@ graph.add_edge("chat_node", END)
 chatbot = graph.compile(checkpointer=checkpointer)
 
 def retrive_all_thread():
-
+    # we are creating a empty set so all unique values comes in
     all_thread=set()
     for checkpoint in checkpointer.list(None):
         all_thread.add(checkpoint.config['configurable']['thread_id'])
